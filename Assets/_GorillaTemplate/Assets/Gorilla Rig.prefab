@@ -889,6 +889,7 @@ MonoBehaviour:
   _player: {fileID: 430285557519011103}
   _handHitProvider: {fileID: 4757890869574275848}
   _turnLocomotion: {fileID: 221162676044501399}
+  _keyboardAndMousMovement: {fileID: 8831524098203269302}
 --- !u!114 &8805360727405952836
 MonoBehaviour:
   m_ObjectHideFlags: 0
