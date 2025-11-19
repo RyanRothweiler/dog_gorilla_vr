@@ -45,7 +45,7 @@ namespace Normal.GorillaTemplate
         [SerializeField]
         private XRKeyboardAndMouseMovement _keyboardAndMousMovement;
 
-        private void Awake()
+        protected override void Awake()
         {
             base.Awake();
 

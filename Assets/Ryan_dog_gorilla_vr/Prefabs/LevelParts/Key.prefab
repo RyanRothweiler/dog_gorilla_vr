@@ -570,9 +570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 549066815746447191}
-  spin_rate: 100
-  bob_rate: 5
-  bob_height: 0.1
+  collider: {fileID: 296345603790140843}
+  physicsBody: {fileID: 3969931442491182017}
 --- !u!54 &3969931442491182017
 Rigidbody:
   m_ObjectHideFlags: 0
