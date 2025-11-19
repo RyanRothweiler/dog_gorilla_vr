@@ -47,6 +47,8 @@ namespace Normal.GorillaTemplate
 
         private void Awake()
         {
+            base.Awake();
+
             if (Application.isEditor)
             {
                 _keyboardAndMousMovement.enabled = true;
