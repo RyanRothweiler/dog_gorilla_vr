@@ -32,7 +32,7 @@ public class CollectableController : MonoBehaviour
         PlayerState playerState = other.gameObject.GetComponent<PlayerState>();
         if (playerState != null)
         {
-            playerState.Collect(collectableType);
+            playerState.Collect(this);
             currentBehavior = new CollectableBehaviorFollowPlayer(this, other.gameObject.transform);
         }
     }
@@ -41,5 +41,10 @@ public class CollectableController : MonoBehaviour
     {
         collider.enabled = state;
         physicsBody.isKinematic = !state;
+    }
+
+    public void Consume()
+    {
+        GameObject.Destroy(this.gameObject);
     }
 }

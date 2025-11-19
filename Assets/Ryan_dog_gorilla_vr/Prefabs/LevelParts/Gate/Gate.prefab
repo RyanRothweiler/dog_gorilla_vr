@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7319676886513106636}
+  - component: {fileID: 8451213187702358771}
+  - component: {fileID: 312801915000382366}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -32,6 +34,42 @@ Transform:
   - {fileID: 211819936829228676}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8451213187702358771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358709274691308150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f740c6b883ad2b49bb1c25ea7a86f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requirements: 00000000
+  doorModel: {fileID: 1839195211501914544}
+  doorCollider: {fileID: 312801915000382366}
+--- !u!65 &312801915000382366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358709274691308150}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.919599, y: 2.0469565, z: 2.9561765}
+  m_Center: {x: 0, y: 1.0108545, z: 0}
 --- !u!1 &1839195211501914544
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +83,7 @@ GameObject:
   - component: {fileID: 7993585246596511683}
   - component: {fileID: 2330635447421937904}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
