@@ -1,3 +1,4 @@
+using Normal.Realtime;
 using UnityEngine;
 using GorillaLocomotion;
 
@@ -14,6 +15,9 @@ public class CollectableController : MonoBehaviour
 
     [SerializeField]
     private Rigidbody physicsBody;
+
+    [SerializeField]
+    public RealtimeView realtimeView;
 
     private ICollectableBehavior currentBehavior;
 
@@ -40,11 +44,11 @@ public class CollectableController : MonoBehaviour
     public void ActivatePhysics(bool state)
     {
         collider.enabled = state;
-        physicsBody.isKinematic = !state;
+        // physicsBody.isKinematic = !state;
     }
 
     public void Consume()
     {
-        GameObject.Destroy(this.gameObject);
+        // Realtime.Destroy(gameObject);
     }
 }

@@ -67,7 +67,7 @@ public class PlayerState : MonoBehaviour
             }
 
             List<CollectableController> typeList = inventory[itemRemoving];
-            typeList[typeList.Count - 1].Consume();
+            // typeList[typeList.Count - 1].Consume();
             inventory[itemRemoving].RemoveAt(typeList.Count - 1);
         }
     }

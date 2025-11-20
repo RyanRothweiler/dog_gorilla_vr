@@ -17,6 +17,8 @@ public class CollectableBehaviorFollowPlayer : ICollectableBehavior
         this.controller = controller;
         this.target = target;
 
+        controller.realtimeView.RequestOwnershipOfSelfAndChildren();
+
         controller.ActivatePhysics(false);
     }
 
