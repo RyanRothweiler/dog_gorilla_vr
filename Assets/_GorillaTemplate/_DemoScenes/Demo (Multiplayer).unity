@@ -3336,9 +3336,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 99313689805041146, guid: e5575e7833155834880a0aaa7fc059a9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3117176247639341373, guid: e5575e7833155834880a0aaa7fc059a9, type: 3}
       propertyPath: m_Name
       value: Realtime + Gorilla Avatar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133357424176075163, guid: e5575e7833155834880a0aaa7fc059a9, type: 3}
+      propertyPath: _joinRoomOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133357424176075163, guid: e5575e7833155834880a0aaa7fc059a9, type: 3}
+      propertyPath: _roomToJoinOnStart
+      value: A
       objectReference: {fileID: 0}
     - target: {fileID: 6693574861097370393, guid: e5575e7833155834880a0aaa7fc059a9, type: 3}
       propertyPath: _localPlayer.head
@@ -3400,7 +3412,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 99313689805041146, guid: e5575e7833155834880a0aaa7fc059a9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

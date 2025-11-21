@@ -1,3 +1,4 @@
+using Normal.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,15 +11,15 @@ public class GateController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField]
-    private GameObject doorModel;
-
-    [SerializeField]
     private AudioSource openSound;
 
     [SerializeField]
     private BoxCollider doorTrigger;
 
-    private static readonly Vector3 DOOR_OPEN_POS = new Vector3(0.0f, -1.5f, 0.0f);
+    [SerializeField]
+    public RealtimeView realtimeView;
+
+    private static readonly Vector3 DOOR_OPEN_POS = new Vector3(0.0f, -2.0f, 0.0f);
 
     private const float DOOR_OPEN_DUR_SEC = 15.0f;
 
@@ -38,10 +39,11 @@ public class GateController : MonoBehaviour
 
     private IEnumerator Open()
     {
+        realtimeView.RequestOwnershipOfSelfAndChildren();
         openSound.Play();
 
-        Vector3 startPos = doorModel.transform.localPosition;
-        Vector3 endPos = DOOR_OPEN_POS;
+        Vector3 startPos = this.transform.position;
+        Vector3 endPos = this.transform.position + DOOR_OPEN_POS;
         float t = 0f;
 
         while (t < DOOR_OPEN_DUR_SEC)
@@ -49,13 +51,11 @@ public class GateController : MonoBehaviour
             t += Time.deltaTime;
             float lerp = Mathf.Clamp01(t / DOOR_OPEN_DUR_SEC);
 
-            doorModel.transform.localPosition = Vector3.Lerp(startPos, endPos, lerp);
+            this.transform.position = Vector3.Lerp(startPos, endPos, lerp);
 
             yield return null;
         }
 
-        // Finished opening
-        doorModel.SetActive(false);
         openSound.Stop();
     }
 

@@ -1,6 +1,5 @@
 using Normal.Realtime;
 using UnityEngine;
-using GorillaLocomotion;
 
 public class CollectableController : MonoBehaviour
 {
@@ -44,7 +43,6 @@ public class CollectableController : MonoBehaviour
     public void ActivatePhysics(bool state)
     {
         collider.enabled = state;
-        // physicsBody.isKinematic = !state;
     }
 
     public void Consume()
