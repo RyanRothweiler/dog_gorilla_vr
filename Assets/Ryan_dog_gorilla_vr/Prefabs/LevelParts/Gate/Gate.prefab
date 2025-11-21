@@ -193,6 +193,8 @@ MonoBehaviour:
   _components:
   - componentID: 1
     component: {fileID: 1954982346329469532}
+  - componentID: 2
+    component: {fileID: 8451213187702358771}
   _childViews: []
 --- !u!114 &1954982346329469532
 MonoBehaviour:

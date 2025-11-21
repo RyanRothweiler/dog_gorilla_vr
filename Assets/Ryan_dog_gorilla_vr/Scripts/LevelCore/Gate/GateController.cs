@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GateController : MonoBehaviour
+public class GateController : RealtimeComponent<GateControllerSyncModel>
 {
 
     [SerializeField]
@@ -23,6 +23,22 @@ public class GateController : MonoBehaviour
 
     private const float DOOR_OPEN_DUR_SEC = 15.0f;
 
+    public void Update()
+    {
+        // Can use normal property sync change events to clean this up
+        if (model != null && model.isMoving)
+        {
+            if (!openSound.isPlaying)
+            {
+                openSound.Play();
+            }
+        }
+        else
+        {
+            openSound.Stop();
+        }
+    }
+
     void OnTriggerEnter(Collider coll)
     {
         PlayerState playerState = coll.attachedRigidbody.GetComponent<PlayerState>();
@@ -40,7 +56,7 @@ public class GateController : MonoBehaviour
     private IEnumerator Open()
     {
         realtimeView.RequestOwnershipOfSelfAndChildren();
-        openSound.Play();
+        model.isMoving = true;
 
         Vector3 startPos = this.transform.position;
         Vector3 endPos = this.transform.position + DOOR_OPEN_POS;
@@ -56,7 +72,7 @@ public class GateController : MonoBehaviour
             yield return null;
         }
 
-        openSound.Stop();
+        model.isMoving = false;
     }
 
 }
