@@ -43,19 +43,28 @@ namespace Normal.GorillaTemplate
         /// Component for editor keyboard xr controls
         /// </summary>
         [SerializeField]
-        private XRKeyboardAndMouseMovement _keyboardAndMousMovement;
+        private XRKeyboardAndMouseMovement _keyboardAndMouseMovement;
 
         protected override void Awake()
         {
             base.Awake();
 
+            bool useKeyboardMovement = false;
             if (Application.isEditor)
             {
-                _keyboardAndMousMovement.enabled = true;
+                useKeyboardMovement = true;
+            }
+#if UNITY_STANDALONE_WIN
+            useKeyboardMovement = true;
+#endif
+
+            if (useKeyboardMovement)
+            {
+                _keyboardAndMouseMovement.enabled = true;
             }
             else
             {
-                _keyboardAndMousMovement.enabled = false;
+                _keyboardAndMouseMovement.enabled = false;
             }
         }
 
