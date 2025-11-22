@@ -38,7 +38,7 @@ public class PatrolBehavior : MonoBehaviour
             }
         }
 
-        if (patrolPath.path.Count > 0)
+        if (patrolPath.path.Count > 0 && realtimeView.isOwnedLocallySelf)
         {
             Transform pathTarget = patrolPath.path[pathIndex % patrolPath.path.Count];
 
