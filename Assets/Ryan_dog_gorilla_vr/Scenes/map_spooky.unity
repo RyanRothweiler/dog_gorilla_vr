@@ -1868,6 +1868,10 @@ PrefabInstance:
       value: Gate
       objectReference: {fileID: 0}
     - target: {fileID: 6424269114685923469, guid: 6a7a30658ed85a1449ab54ff8ed2fd9c, type: 3}
+      propertyPath: _realtime
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424269114685923469, guid: 6a7a30658ed85a1449ab54ff8ed2fd9c, type: 3}
       propertyPath: _viewUUID
       value: 4f4f9d94-a21f-43fc-800b-517b0a49c28d
       objectReference: {fileID: 0}
@@ -1972,6 +1976,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8639075418602603294, guid: 3812af5eafb18bf46a1cf3232e275fb0, type: 3}
+      propertyPath: _realtime
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639075418602603294, guid: 3812af5eafb18bf46a1cf3232e275fb0, type: 3}
+      propertyPath: _viewUUID
+      value: 23138f48-155b-459d-939f-a8701f55e86e
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2028,6 +2040,10 @@ PrefabInstance:
     - target: {fileID: 7608902704643193024, guid: 175c4c97375bfd4468eab216ce41731f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570248396680681663, guid: 175c4c97375bfd4468eab216ce41731f, type: 3}
+      propertyPath: _realtime
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8570248396680681663, guid: 175c4c97375bfd4468eab216ce41731f, type: 3}
       propertyPath: _viewUUID
