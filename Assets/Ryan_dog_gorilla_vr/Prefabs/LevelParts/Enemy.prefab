@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6890891266017103118}
   - component: {fileID: 8639075418602603294}
   - component: {fileID: 3318012414235692952}
+  - component: {fileID: 8403704109458259257}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -70,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80a70fa0008009439f30af3adf9fb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 0.4
   patrolPath: {fileID: 0}
   realtimeView: {fileID: 8639075418602603294}
 --- !u!54 &6890891266017103118
@@ -141,6 +142,21 @@ MonoBehaviour:
   _syncScale: 1
   _syncVelocity: 1
   _maintainOwnershipWhileSleeping: 1
+--- !u!114 &8403704109458259257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656079447567341281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2beee11b2c8c57241a3887c05b488bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.6
+  enemyCheckDist: 15
+  patrolBehavior: {fileID: 5581351194570729950}
 --- !u!1 &5967500715958696704
 GameObject:
   m_ObjectHideFlags: 0

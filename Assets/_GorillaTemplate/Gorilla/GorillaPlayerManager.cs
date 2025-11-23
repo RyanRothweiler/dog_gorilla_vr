@@ -5,12 +5,17 @@ using Normal.Realtime;
 using Normal.XR;
 using UnityEngine;
 
-namespace Normal.GorillaTemplate {
+namespace Normal.GorillaTemplate
+{
     /// <summary>
     /// Configures <see cref="GorillaAvatar"/> instances when they're spawned.
     /// </summary>
     [RequireComponent(typeof(RealtimeAvatarManager))]
-    public class GorillaPlayerManager : MonoBehaviour {
+    public class GorillaPlayerManager : MonoBehaviour
+    {
+        // Use some consolidated singleton class here.
+        public static GorillaPlayerManager Instance;
+
         private readonly Dictionary<int, GorillaAvatar> _avatars = new Dictionary<int, GorillaAvatar>();
 
         public IReadOnlyDictionary<int, GorillaAvatar> avatars => _avatars;
@@ -22,26 +27,32 @@ namespace Normal.GorillaTemplate {
         public event PlayerJoinedLeft playerJoined;
         public event PlayerJoinedLeft playerLeft;
 
-        private void Awake() {
+        private void Awake()
+        {
+            Instance = this;
+
             _avatarManager = GetComponent<RealtimeAvatarManager>();
 
-            _avatarManager.avatarCreated   += OnAvatarCreated;
+            _avatarManager.avatarCreated += OnAvatarCreated;
             _avatarManager.avatarDestroyed += OnAvatarDestroyed;
-            LocalPlayerData.onChanged      += OnLocalPlayerDataChanged;
+            LocalPlayerData.onChanged += OnLocalPlayerDataChanged;
         }
 
-        private void OnDestroy() {
-            _avatarManager.avatarCreated   -= OnAvatarCreated;
+        private void OnDestroy()
+        {
+            _avatarManager.avatarCreated -= OnAvatarCreated;
             _avatarManager.avatarDestroyed -= OnAvatarDestroyed;
-            LocalPlayerData.onChanged      -= OnLocalPlayerDataChanged;
+            LocalPlayerData.onChanged -= OnLocalPlayerDataChanged;
         }
 
-        private void OnAvatarCreated(RealtimeAvatarManager manager, RealtimeAvatar avatar, bool isLocalAvatar) {
+        private void OnAvatarCreated(RealtimeAvatarManager manager, RealtimeAvatar avatar, bool isLocalAvatar)
+        {
             var gorillaAvatar = avatar.GetComponent<GorillaAvatar>();
 
             _avatars.Add(avatar.ownerIDInHierarchy, gorillaAvatar);
 
-            if (isLocalAvatar) {
+            if (isLocalAvatar)
+            {
                 _localAvatar = gorillaAvatar;
 
                 OnLocalPlayerDataChanged();
@@ -53,30 +64,35 @@ namespace Normal.GorillaTemplate {
             playerJoined?.Invoke(gorillaAvatar, isLocalAvatar);
         }
 
-        private void OnAvatarDestroyed(RealtimeAvatarManager manager, RealtimeAvatar avatar, bool isLocalAvatar) {
-            if (_localAvatar) {
+        private void OnAvatarDestroyed(RealtimeAvatarManager manager, RealtimeAvatar avatar, bool isLocalAvatar)
+        {
+            if (_localAvatar)
+            {
                 _localAvatar = null;
             }
 
-            if (_avatars.Remove(avatar.ownerIDInHierarchy, out var gorillaAvatar)) {
+            if (_avatars.Remove(avatar.ownerIDInHierarchy, out var gorillaAvatar))
+            {
                 playerLeft?.Invoke(gorillaAvatar, isLocalAvatar);
             }
         }
 
-        private void OnLocalPlayerDataChanged() {
+        private void OnLocalPlayerDataChanged()
+        {
             // Setup local rig
-            GorillaLocalRig.instance.turnMode = LocalPlayerData.turnMode switch {
-                LocalPlayerData.TurnMode.Snap     => XRTurnLocomotion.TurnMode.Snap,
-                LocalPlayerData.TurnMode.Smooth   => XRTurnLocomotion.TurnMode.Smooth,
+            GorillaLocalRig.instance.turnMode = LocalPlayerData.turnMode switch
+            {
+                LocalPlayerData.TurnMode.Snap => XRTurnLocomotion.TurnMode.Snap,
+                LocalPlayerData.TurnMode.Smooth => XRTurnLocomotion.TurnMode.Smooth,
                 LocalPlayerData.TurnMode.Disabled => XRTurnLocomotion.TurnMode.Disabled,
                 _ => throw new Exception($"Unexpected turn mode: {LocalPlayerData.turnMode}"),
             };
             GorillaLocalRig.instance.snapTurnIncrement = LocalPlayerData.snapTurnIncrement;
-            GorillaLocalRig.instance.smoothTurnSpeed   = LocalPlayerData.smoothTurnSpeed;
+            GorillaLocalRig.instance.smoothTurnSpeed = LocalPlayerData.smoothTurnSpeed;
 
             // Setup local avatar
             _localAvatar.playerDataSync.nameTag = LocalPlayerData.playerName;
-            _localAvatar.playerDataSync.color   = LocalPlayerData.playerColor;
+            _localAvatar.playerDataSync.color = LocalPlayerData.playerColor;
         }
     }
 }

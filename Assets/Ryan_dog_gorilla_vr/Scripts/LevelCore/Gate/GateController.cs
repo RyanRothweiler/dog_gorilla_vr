@@ -41,12 +41,12 @@ public class GateController : RealtimeComponent<GateControllerSyncModel>
 
     void OnTriggerEnter(Collider coll)
     {
-        PlayerState playerState = coll.attachedRigidbody.GetComponent<PlayerState>();
-        if (playerState != null)
+        SpookyMapPlayer player = coll.attachedRigidbody.GetComponent<SpookyMapPlayer>();
+        if (player != null)
         {
-            if (playerState.ContainsAtleast(requirements))
+            if (player.ContainsAtleast(requirements))
             {
-                playerState.ConsumeInventory(requirements);
+                player.ConsumeInventory(requirements);
                 doorTrigger.enabled = false;
                 StartCoroutine(Open());
             }

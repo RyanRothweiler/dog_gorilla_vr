@@ -1,10 +1,16 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
+public class SpookyMapPlayer : MonoBehaviour
 {
+
+    [SerializeField]
+    private GorillaLocomotion.Player gorillaPlayer;
+
     private Dictionary<CollectableType, List<CollectableController>> inventory = new Dictionary<CollectableType, List<CollectableController>>();
+
+    private static readonly Vector3 RESET_POS = new Vector3(0.0f, 0.5f, 0.0f);
 
     public void Collect(CollectableController collectable)
     {
@@ -69,6 +75,15 @@ public class PlayerState : MonoBehaviour
             List<CollectableController> typeList = inventory[itemRemoving];
             // typeList[typeList.Count - 1].Consume();
             inventory[itemRemoving].RemoveAt(typeList.Count - 1);
+        }
+    }
+
+    private void OnCollisionEnter(Collision coll)
+    {
+        if (coll.gameObject.GetComponent<EnemyController>())
+        {
+            // TODO do a rest and reload of the level.
+            // Teleport all players back to the start.
         }
     }
 }

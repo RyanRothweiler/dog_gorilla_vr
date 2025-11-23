@@ -572,8 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableType: 0
   model: {fileID: 549066815746447191}
-  collider: {fileID: 296345603790140843}
-  physicsBody: {fileID: 0}
+  coll: {fileID: 296345603790140843}
   realtimeView: {fileID: 8570248396680681663}
 --- !u!114 &8570248396680681663
 MonoBehaviour:

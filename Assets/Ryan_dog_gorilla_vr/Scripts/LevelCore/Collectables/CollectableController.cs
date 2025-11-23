@@ -10,10 +10,7 @@ public class CollectableController : MonoBehaviour
     public GameObject model;
 
     [SerializeField]
-    private Collider collider;
-
-    [SerializeField]
-    private Rigidbody physicsBody;
+    private Collider coll;
 
     [SerializeField]
     public RealtimeView realtimeView;
@@ -32,17 +29,17 @@ public class CollectableController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        PlayerState playerState = other.gameObject.GetComponent<PlayerState>();
-        if (playerState != null)
+        SpookyMapPlayer player = other.gameObject.GetComponent<SpookyMapPlayer>();
+        if (player != null)
         {
-            playerState.Collect(this);
+            player.Collect(this);
             currentBehavior = new CollectableBehaviorFollowPlayer(this, other.gameObject.transform);
         }
     }
 
     public void ActivatePhysics(bool state)
     {
-        collider.enabled = state;
+        coll.enabled = state;
     }
 
     public void Consume()
