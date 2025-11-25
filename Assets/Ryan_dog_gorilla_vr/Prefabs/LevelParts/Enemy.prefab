@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.6
   viewConeDot: 0.5
-  enemyCheckDist: 15
+  enemyCheckDist: 8
   patrolBehavior: {fileID: 5581351194570729950}
   realtimeView: {fileID: 8639075418602603294}
 --- !u!1 &5967500715958696704

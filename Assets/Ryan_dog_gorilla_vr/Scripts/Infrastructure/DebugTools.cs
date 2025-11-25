@@ -6,7 +6,7 @@ public class DebugTools : MonoBehaviour
     {
         if (Application.isEditor)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.F))
             {
                 Time.timeScale = 20.0f;
             }
