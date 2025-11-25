@@ -82,8 +82,17 @@ public class SpookyMapPlayer : MonoBehaviour
     {
         if (coll.gameObject.GetComponent<EnemyController>())
         {
-            // TODO do a rest and reload of the level.
-            // Teleport all players back to the start.
+            StartCoroutine(Teleport(RESET_POS));
         }
+    }
+
+    private IEnumerator Teleport(Vector3 pos)
+    {
+        gorillaPlayer.enabled = false;
+        this.transform.position = pos;
+
+        yield return null;
+
+        gorillaPlayer.enabled = true;
     }
 }

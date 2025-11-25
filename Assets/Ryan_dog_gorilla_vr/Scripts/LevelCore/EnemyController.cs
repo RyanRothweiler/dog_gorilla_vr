@@ -1,11 +1,14 @@
+using Normal.Realtime;
 using UnityEngine;
 using Normal.GorillaTemplate;
 
 public class EnemyController : MonoBehaviour
 {
-
     [SerializeField]
     private float moveSpeed;
+
+    [SerializeField]
+    private float viewConeDot;
 
     [SerializeField]
     private float enemyCheckDist;
@@ -14,12 +17,24 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private PatrolBehavior patrolBehavior;
 
+    [SerializeField]
+    private RealtimeView realtimeView;
+
     private SpookyMapPlayer chaseTarget;
 
     private const float FLOOR_OFFSET = 0.5f;
 
     void Update()
     {
+        // Only owner is responsible for the enemy behavior
+        if (!realtimeView.isOwnedLocallySelf)
+        {
+            return;
+        }
+
+        // Reset the target
+        chaseTarget = null;
+
         // Check for new target
         foreach (var kvp in GorillaPlayerManager.Instance.avatars)
         {
@@ -41,17 +56,15 @@ public class EnemyController : MonoBehaviour
                         SpookyMapPlayer player = hit.collider.attachedRigidbody.GetComponent<SpookyMapPlayer>();
                         if (player != null)
                         {
-                            chaseTarget = player;
+                            // check facing direction
+                            Vector3 dir = (player.transform.position - this.transform.position).normalized;
+                            float dot = Vector3.Dot(this.transform.forward, dir);
+                            if (dot > viewConeDot)
+                            {
+                                chaseTarget = player;
+                            }
                         }
                     }
-                    else
-                    {
-                        chaseTarget = null;
-                    }
-                }
-                else
-                {
-                    chaseTarget = null;
                 }
             }
         }
