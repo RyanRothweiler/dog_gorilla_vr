@@ -15,6 +15,9 @@ public class CollectableController : MonoBehaviour
     [SerializeField]
     public RealtimeView realtimeView;
 
+    [SerializeField]
+    private AudioSource collectSound;
+
     private ICollectableBehavior currentBehavior;
 
     void Start()
@@ -34,16 +37,16 @@ public class CollectableController : MonoBehaviour
         {
             player.Collect(this);
             currentBehavior = new CollectableBehaviorFollowPlayer(this, other.gameObject.transform);
+
+            if (collectSound != null)
+            {
+                collectSound.Play();
+            }
         }
     }
 
     public void ActivatePhysics(bool state)
     {
         coll.enabled = state;
-    }
-
-    public void Consume()
-    {
-        // Realtime.Destroy(gameObject);
     }
 }
