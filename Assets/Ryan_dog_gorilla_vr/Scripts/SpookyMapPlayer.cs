@@ -10,7 +10,15 @@ public class SpookyMapPlayer : MonoBehaviour
 
     private Dictionary<CollectableType, List<CollectableController>> inventory = new Dictionary<CollectableType, List<CollectableController>>();
 
-    private static readonly Vector3 RESET_POS = new Vector3(0.0f, 0.5f, 0.0f);
+    private static readonly Vector3 RESET_POS = new Vector3(0.0f, 1.0f, 0.0f);
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Teleport(RESET_POS));
+        }
+    }
 
     public void Collect(CollectableController collectable)
     {
@@ -93,6 +101,7 @@ public class SpookyMapPlayer : MonoBehaviour
 
         yield return null;
 
+        gorillaPlayer.InitializeValues();
         gorillaPlayer.enabled = true;
     }
 }
