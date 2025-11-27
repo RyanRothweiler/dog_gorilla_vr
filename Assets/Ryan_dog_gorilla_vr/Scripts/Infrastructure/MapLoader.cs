@@ -8,14 +8,18 @@ public class MapLoader : MonoBehaviour
     // TODO this should be in some kind of build sript to ensure these scense are included in the build.
     private static readonly List<String> MAPS = new List<String>
     {
-        "map_spooky"
+        "map_spooky",
+        "map_spooky_climb",
     };
 
     void Awake()
     {
-        String map = MAPS[UnityEngine.Random.Range(0, MAPS.Count - 1)];
-        Debug.Log($"Loading map {map}");
-        SceneManager.LoadScene(map, LoadSceneMode.Additive);
+        foreach (String map in MAPS)
+        {
+            Debug.Log($"Loading map {map}");
+            SceneManager.LoadScene(map, LoadSceneMode.Additive);
+        }
+
     }
 
 }

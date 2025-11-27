@@ -6,9 +6,9 @@ public class CollectableBehaviorFollowPlayer : ICollectableBehavior
 
     private Transform target;
 
-    private const float ANIM_RATE = 5.0f;
+    private const float ANIM_RATE = 10.0f;
 
-    private const float UP_OFFSET = 0.4f;
+    private const float UP_OFFSET = 0.8f;
 
     private const float SCALE = 0.2f;
 
