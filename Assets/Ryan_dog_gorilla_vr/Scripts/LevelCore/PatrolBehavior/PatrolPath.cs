@@ -13,7 +13,9 @@ public class PatrolPath : MonoBehaviour
     void OnDrawGizmos()
     {
         if (path == null || path.Count == 0)
+        {
             return;
+        }
 
         Gizmos.color = Color.yellow;
 
@@ -21,7 +23,9 @@ public class PatrolPath : MonoBehaviour
         {
             Transform current = path[i];
             if (current == null)
+            {
                 continue;
+            }
 
             // Draw a sphere at the patrol point
             Gizmos.DrawSphere(current.position, 0.1f);

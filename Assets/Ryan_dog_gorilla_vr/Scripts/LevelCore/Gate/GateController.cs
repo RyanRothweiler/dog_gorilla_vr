@@ -20,7 +20,7 @@ public class GateController : RealtimeComponent<GateControllerSyncModel>
     [SerializeField] private BoxCollider doorTrigger;
 
     // Realtime networking component for ownership control.
-    [SerializeField] public RealtimeView realtimeView;
+    [SerializeField] private RealtimeView realtimeView;
 
     // Local offset for the door when fully open.
     private static readonly Vector3 DOOR_OPEN_POS = new Vector3(0f, -2f, 0f);
