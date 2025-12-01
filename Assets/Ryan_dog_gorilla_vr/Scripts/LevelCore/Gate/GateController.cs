@@ -3,35 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls a gate that opens when a player has the required collectables.
+/// </summary>
 public class GateController : RealtimeComponent<GateControllerSyncModel>
 {
-
-    [SerializeField]
-    private List<CollectableType> requirements;
+    // Types of collectables required to open the gate.
+    [SerializeField] private List<CollectableType> requirements;
 
     [Header("Components")]
-    [SerializeField]
-    private AudioSource openSound;
 
-    [SerializeField]
-    private BoxCollider doorTrigger;
+    // Sound played when the gate is moving.
+    [SerializeField] private AudioSource openSound;
 
-    [SerializeField]
-    public RealtimeView realtimeView;
+    // Trigger collider that detects players.
+    [SerializeField] private BoxCollider doorTrigger;
 
-    private static readonly Vector3 DOOR_OPEN_POS = new Vector3(0.0f, -2.0f, 0.0f);
+    // Realtime networking component for ownership control.
+    [SerializeField] public RealtimeView realtimeView;
 
-    private const float DOOR_OPEN_DUR_SEC = 15.0f;
+    // Local offset for the door when fully open.
+    private static readonly Vector3 DOOR_OPEN_POS = new Vector3(0f, -2f, 0f);
 
-    public void Update()
+    // Time in seconds for the door to fully open.
+    private const float DOOR_OPEN_DUR_SEC = 15f;
+
+
+    protected override void OnRealtimeModelReplaced(GateControllerSyncModel previousModel, GateControllerSyncModel currentModel)
     {
-        // Can use normal property sync change events to clean this up
-        if (model != null && model.isMoving)
+        if (previousModel != null)
+        {
+            previousModel.isMovingDidChange -= IsMovingDidChange;
+        }
+
+        if (currentModel != null)
+        {
+            currentModel.isMovingDidChange += IsMovingDidChange;
+        }
+    }
+
+    private void IsMovingDidChange(GateControllerSyncModel model, bool isMoving)
+    {
+        if (isMoving)
         {
             if (!openSound.isPlaying)
-            {
                 openSound.Play();
-            }
         }
         else
         {
@@ -44,10 +60,14 @@ public class GateController : RealtimeComponent<GateControllerSyncModel>
         SpookyMapPlayer player = coll.attachedRigidbody.GetComponent<SpookyMapPlayer>();
         if (player != null)
         {
+            // Check if player has all required collectables.
             if (player.ContainsAtleast(requirements))
             {
+                // Consume items and disable trigger to prevent re-entry.
                 player.ConsumeInventory(requirements);
                 doorTrigger.enabled = false;
+
+                // Start opening the door.
                 StartCoroutine(Open());
             }
         }
@@ -55,11 +75,12 @@ public class GateController : RealtimeComponent<GateControllerSyncModel>
 
     private IEnumerator Open()
     {
+        // Request network ownership so movement syncs across clients.
         realtimeView.RequestOwnershipOfSelfAndChildren();
         model.isMoving = true;
 
-        Vector3 startPos = this.transform.position;
-        Vector3 endPos = this.transform.position + DOOR_OPEN_POS;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = transform.position + DOOR_OPEN_POS;
         float t = 0f;
 
         while (t < DOOR_OPEN_DUR_SEC)
@@ -67,12 +88,11 @@ public class GateController : RealtimeComponent<GateControllerSyncModel>
             t += Time.deltaTime;
             float lerp = Mathf.Clamp01(t / DOOR_OPEN_DUR_SEC);
 
-            this.transform.position = Vector3.Lerp(startPos, endPos, lerp);
+            transform.position = Vector3.Lerp(startPos, endPos, lerp);
 
             yield return null;
         }
 
         model.isMoving = false;
     }
-
 }
