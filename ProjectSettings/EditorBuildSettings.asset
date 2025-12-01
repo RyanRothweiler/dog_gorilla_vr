@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ryan_dog_gorilla_vr/Scenes/map_spooky.unity
     guid: 41403e74bc0ba9442868dcc02ac5b06a
+  - enabled: 1
+    path: Assets/Ryan_dog_gorilla_vr/Scenes/map_spooky_climb.unity
+    guid: 90a34a509e1016f4296bd3a5f27789c6
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a1c5c0da903480744ab1b7b38376f126, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d30355ffd2a462f48963c08101163154, type: 3}
