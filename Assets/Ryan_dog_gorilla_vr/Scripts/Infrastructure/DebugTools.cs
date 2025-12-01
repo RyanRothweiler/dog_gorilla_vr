@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Hold F to speed up time (Editor only).
+/// </summary>
 public class DebugTools : MonoBehaviour
 {
     void Update()

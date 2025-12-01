@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Loads a predefined list of additive map scenes on startup.
+/// </summary>
 public class MapLoader : MonoBehaviour
 {
     // TODO this should be in some kind of build sript to ensure these scense are included in the build.
