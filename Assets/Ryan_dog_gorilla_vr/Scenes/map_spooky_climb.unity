@@ -229,7 +229,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6245153851395289000, guid: 29fdf0fdf3f8bf14bb590fd82e4ad8ac, type: 3}
       propertyPath: m_Name
-      value: Enemy_Fast (1)
+      value: Enemy_Fast
       objectReference: {fileID: 0}
     - target: {fileID: 6464898993119968441, guid: 29fdf0fdf3f8bf14bb590fd82e4ad8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,7 +549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3213060312030437089, guid: 26819a3c6ddf3364885ca94250a2861d, type: 3}
       propertyPath: m_Name
-      value: LightPost (1)
+      value: LightPost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1267,7 +1267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984972012727497805, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
       propertyPath: m_Name
-      value: Wall  (1)
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3878866966100595890, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
       propertyPath: m_LocalScale.x
@@ -1865,50 +1865,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
---- !u!1 &1277888200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1277888202}
-  - component: {fileID: 1277888201}
-  m_Layer: 0
-  m_Name: DebugTools
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1277888201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277888200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfdb8c73cc5ede48b9efa686c05782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1277888202
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277888200}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.25174, y: 4.2136555, z: -11.5921335}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1368478186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2371,7 +2327,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984972012727497805, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
       propertyPath: m_Name
-      value: Wall  (1)
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3878866966100595890, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
       propertyPath: m_LocalScale.x
@@ -2816,7 +2772,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984972012727497805, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
       propertyPath: m_Name
-      value: Wall  (1)
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3878866966100595890, guid: e387b49e0f49d2743b49085683d7c3e1, type: 3}
       propertyPath: m_LocalScale.x
@@ -3117,7 +3073,6 @@ SceneRoots:
   - {fileID: 2043994623}
   - {fileID: 263675538}
   - {fileID: 798490525}
-  - {fileID: 1277888202}
   - {fileID: 820238202}
   - {fileID: 863749851}
   - {fileID: 1649263691}
