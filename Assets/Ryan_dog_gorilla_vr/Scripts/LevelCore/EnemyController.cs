@@ -2,63 +2,67 @@ using Normal.Realtime;
 using UnityEngine;
 using Normal.GorillaTemplate;
 
+/// <summary>
+/// Controls enemy behavior: patrols by default, and chases players in view cone when detected.
+/// Only the network owner updates enemy logic.
+/// </summary>
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed;
+    // Movement speed of the enemy.
+    [SerializeField] private float moveSpeed;
 
-    [SerializeField]
-    private float viewConeDot;
+    // Minimum dot product between enemy forward and player direction to consider player in view.
+    [SerializeField] private float viewConeDot;
 
-    [SerializeField]
-    private float enemyCheckDist;
+    // Maximum distance to check for players.
+    [SerializeField] private float enemyCheckDist;
 
     [Header("Components")]
-    [SerializeField]
-    private PatrolBehavior patrolBehavior;
 
-    [SerializeField]
-    private RealtimeView realtimeView;
+    // Patrol behavior component (enabled when not chasing).
+    [SerializeField] private PatrolBehavior patrolBehavior;
 
+    // Networking component for ownership checks.
+    [SerializeField] private RealtimeView realtimeView;
+
+    // Current target player to chase.
     private SpookyMapPlayer chaseTarget;
 
+    // Vertical offset for raycasting from enemy position.
     private const float FLOOR_OFFSET = 0.5f;
 
     void Update()
     {
-        // Only owner is responsible for the enemy behavior
+        // Only the network owner updates enemy behavior.
         if (!realtimeView.isOwnedLocallySelf)
         {
             return;
         }
 
-        // Reset the target
         chaseTarget = null;
 
-        // Check for new target
+        // Look for new target
         foreach (var kvp in GorillaPlayerManager.Instance.avatars)
         {
             GorillaAvatar avatar = kvp.Value;
 
-            if (Vector3.Distance(this.transform.position, avatar.transform.position) < enemyCheckDist)
+            if (Vector3.Distance(transform.position, avatar.transform.position) < enemyCheckDist)
             {
-                Vector3 origin = this.transform.position;
-                origin.y += FLOOR_OFFSET;
+                Vector3 origin = transform.position + Vector3.up * FLOOR_OFFSET;
+                Vector3 dirToPlayer = (avatar.transform.position - origin).normalized;
 
-                Ray ray = new Ray(origin, (avatar.transform.position - origin).normalized);
+                Ray ray = new Ray(origin, dirToPlayer);
                 Debug.DrawRay(ray.origin, ray.direction, Color.green, 0.01f);
 
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     if (hit.rigidbody != null)
                     {
                         SpookyMapPlayer player = hit.collider.attachedRigidbody.GetComponent<SpookyMapPlayer>();
                         if (player != null)
                         {
-                            // check facing direction
-                            Vector3 dir = (player.transform.position - this.transform.position).normalized;
-                            float dot = Vector3.Dot(this.transform.forward, dir);
+                            // Check if player is within enemy view cone
+                            float dot = Vector3.Dot(transform.forward, dirToPlayer);
                             if (dot > viewConeDot)
                             {
                                 chaseTarget = player;
@@ -69,14 +73,15 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Chase players
+        // Enable patrol if no player is detected
         patrolBehavior.enabled = (chaseTarget == null);
+
+        // Chase player if detected
         if (chaseTarget != null)
         {
-            Vector3 dir = (chaseTarget.transform.position - this.transform.position).normalized;
-
-            this.transform.position = this.transform.position + (dir * moveSpeed * Time.deltaTime);
-            this.transform.forward = dir;
+            Vector3 dir = (chaseTarget.transform.position - transform.position).normalized;
+            transform.position += dir * moveSpeed * Time.deltaTime;
+            transform.forward = dir;
         }
     }
 }

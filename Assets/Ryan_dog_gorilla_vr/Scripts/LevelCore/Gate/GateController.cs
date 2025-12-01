@@ -28,7 +28,6 @@ public class GateController : RealtimeComponent<GateControllerSyncModel>
     // Time in seconds for the door to fully open.
     private const float DOOR_OPEN_DUR_SEC = 15f;
 
-
     protected override void OnRealtimeModelReplaced(GateControllerSyncModel previousModel, GateControllerSyncModel currentModel)
     {
         if (previousModel != null)
